@@ -1,0 +1,21 @@
+{
+    "name": "Miniverse",
+    "rootNamespace": "",
+    "references": [
+        "GUID:ccdb2a3bafe19b34792bb6e19521813e",
+        "GUID:07c110baca4842940aaf36247a516241",
+        "GUID:62b9d94cd08d5d047b266d42e8684cb8",
+        "GUID:756335c0388f7114790e504ed368ae1d",
+        "GUID:5a46ad82eac024e4fbb6a0516a5def17",
+        "GUID:89d3f16510173f648b111d7b1fa31127"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
