@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.cysharp.magiconion": {
+      "version": "https://github.com/Cysharp/MagicOnion.git?path=src/MagicOnion.Client.Unity/Assets/Scripts/MagicOnion#6.1.6",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "53f6d1fc9b91e63a0f70c0740fd9b0f737f01fa6"
+    },
     "com.cysharp.yetanotherhttphandler": {
       "version": "https://github.com/Cysharp/YetAnotherHttpHandler.git?path=src/YetAnotherHttpHandler",
       "depth": 0,
