@@ -7,6 +7,12 @@
       "dependencies": {},
       "hash": "c25960e669c29abf629be7611be7599acb942fa4"
     },
+    "com.euglenach.miniverse.shared.unity": {
+      "version": "file:../../../../Miniverse/Miniverse.Shared/MiniverseShared/MiniverseShared",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
     "com.github-glitchenzo.nugetforunity": {
       "version": "https://github.com/GlitchEnzo/NuGetForUnity.git?path=/src/NuGetForUnity",
       "depth": 0,
