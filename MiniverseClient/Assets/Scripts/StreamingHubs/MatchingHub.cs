@@ -9,6 +9,7 @@ using MagicOnion.Client;
 using MagicOnion.Unity;
 using MiniverseShared.MessagePackObjects;
 using MiniverseShared.StreamingHubs;
+using UnityEngine;
 
 namespace StreamingHubs
 {
@@ -54,7 +55,7 @@ namespace StreamingHubs
         {
             public void OnJoin()
             {
-                
+                Debug.Log("OnJoin");
             }
 
             public void OnLeave()
