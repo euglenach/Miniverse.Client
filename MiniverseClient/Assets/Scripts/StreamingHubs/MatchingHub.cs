@@ -40,9 +40,9 @@ namespace StreamingHubs
             return new(player, channel, hubClient, receiver);
         }
 
-        public async UniTask JoinAsync(Ulid ulid)
+        public async UniTask CreateRoomAsync()
         {
-            await matchingHub.JoinAsync(player, ulid);
+            await matchingHub.CreateRoomAsync(player);
         }
         
         public async void Dispose()

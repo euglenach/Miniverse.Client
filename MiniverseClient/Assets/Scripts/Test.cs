@@ -10,12 +10,12 @@ public class Test : MonoBehaviour
 {
     private async UniTask Start()
     {
-        // CreateRoom().Forget();
-        // CreateRoom().Forget();
-        // CreateRoom().Forget();
+        CreateRoom().Forget();
+        CreateRoom().Forget();
+        CreateRoom().Forget();
         
-        var response = await MessagePackWebAPI.GetAsync<MagicOnionURLRequest, MagicOnionURLResponse>();
-        Debug.Log(response.URL);
+        // var response = await MessagePackWebAPI.GetAsync<MagicOnionURLRequest, MagicOnionURLResponse>();
+        // Debug.Log(response.URL);
     }
 
     async UniTaskVoid CreateRoom()
