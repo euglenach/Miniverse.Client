@@ -45,6 +45,11 @@ namespace StreamingHubs
             await matchingHub.CreateRoomAsync(player);
         }
         
+        public async UniTask JoinRoomAsync(Ulid roomUlid)
+        {
+            await matchingHub.JoinRoomAsync(roomUlid, player);
+        }
+        
         public async void Dispose()
         {
             await channel.ShutdownAsync();
@@ -53,12 +58,12 @@ namespace StreamingHubs
 
         private class MatchingReceiver : IMatchingReceiver
         {
-            public void OnJoin()
+            public void OnJoin(Player player)
             {
                 Debug.Log("OnJoin");
             }
 
-            public void OnLeave()
+            public void OnLeave(Player player)
             {
                 
             }

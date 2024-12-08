@@ -10,18 +10,24 @@ public class Test : MonoBehaviour
 {
     private async UniTask Start()
     {
-        CreateRoom().Forget();
-        CreateRoom().Forget();
-        CreateRoom().Forget();
+        await CreateRoom();
+        await JoinRoom(default);
         
         // var response = await MessagePackWebAPI.GetAsync<MagicOnionURLRequest, MagicOnionURLResponse>();
         // Debug.Log(response.URL);
     }
 
-    async UniTaskVoid CreateRoom()
+    async UniTask CreateRoom()
     {
-        var player = new Player{ Ulid = Ulid.NewUlid(), Name = "Test" };
+        var player = new Player{ Ulid = Ulid.NewUlid(), Name = "Host" };
         var hub = await MatchingHub.CreateAsync(player);
         await hub.CreateRoomAsync();
+    }
+    
+    async UniTask JoinRoom(Ulid roomUlid)
+    {
+        var player = new Player{ Ulid = Ulid.NewUlid(), Name = "Guest" };
+        var hub = await MatchingHub.CreateAsync(player);
+        await hub.JoinRoomAsync(roomUlid);
     }
 }
