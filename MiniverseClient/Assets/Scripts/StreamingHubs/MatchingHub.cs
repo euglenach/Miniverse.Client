@@ -9,6 +9,7 @@ using MagicOnion.Client;
 using MagicOnion.Unity;
 using MiniverseShared.MessagePackObjects;
 using MiniverseShared.StreamingHubs;
+using R3;
 using UnityEngine;
 
 namespace StreamingHubs
@@ -19,6 +20,13 @@ namespace StreamingHubs
         private readonly GrpcChannelx channel;
         private readonly IMatchingHub matchingHub;
         private readonly MatchingReceiver receiver;
+
+        #region MatchingReceiverEvents
+        public Observable<Player> OnJoin => receiver.onJoin;
+        public Observable<MajorityGameRoomInfo> OnJoinSelf => receiver.onJoinSelf;
+        public Observable<Player> OnLeave => receiver.onLeave;
+
+        #endregion
 
         private MatchingHub(Player player, GrpcChannelx channel, IMatchingHub matchingHub, MatchingReceiver receiver)
         {
@@ -58,14 +66,26 @@ namespace StreamingHubs
 
         private class MatchingReceiver : IMatchingReceiver
         {
-            public void OnJoin(Player player)
+            public readonly Subject<Player> onJoin = new();
+            public readonly Subject<MajorityGameRoomInfo> onJoinSelf = new();
+            public readonly Subject<Player> onLeave = new();
+            
+            void IMatchingReceiver.OnJoin(Player player)
             {
-                Debug.Log("OnJoin");
+                Debug.Log($"{nameof(IMatchingReceiver.OnJoin)}");
+                onJoin.OnNext(player);
+            }
+
+            void IMatchingReceiver.OnJoinSelf(MajorityGameRoomInfo roomInfo)
+            {
+                Debug.Log($"{nameof(IMatchingReceiver.OnJoinSelf)}");
+                onJoinSelf.OnNext(roomInfo);
             }
 
             public void OnLeave(Player player)
             {
-                
+                Debug.Log($"{nameof(IMatchingReceiver.OnLeave)}");
+                onLeave.OnNext(player);
             }
         }
     }

@@ -47,13 +47,15 @@ namespace MessagePack.Resolvers
 
         static GeneratedResolverGetFormatterHelper()
         {
-            lookup = new global::System.Collections.Generic.Dictionary<global::System.Type, int>(5)
+            lookup = new global::System.Collections.Generic.Dictionary<global::System.Type, int>(7)
             {
-                { typeof(global::MiniverseShared.MessagePackObjects.Player), 0 },
-                { typeof(global::MiniverseShared.MessagePackObjects.Room), 1 },
-                { typeof(global::MiniverseShared.Nanka), 2 },
-                { typeof(global::MiniverseShared.WebAPI.MagicOnionURLRequest), 3 },
-                { typeof(global::MiniverseShared.WebAPI.MagicOnionURLResponse), 4 },
+                { typeof(global::System.Collections.Generic.List<global::MiniverseShared.MessagePackObjects.Player>), 0 },
+                { typeof(global::MiniverseShared.MessagePackObjects.MajorityGameRoomInfo), 1 },
+                { typeof(global::MiniverseShared.MessagePackObjects.Player), 2 },
+                { typeof(global::MiniverseShared.MessagePackObjects.Room), 3 },
+                { typeof(global::MiniverseShared.Nanka), 4 },
+                { typeof(global::MiniverseShared.WebAPI.MagicOnionURLRequest), 5 },
+                { typeof(global::MiniverseShared.WebAPI.MagicOnionURLResponse), 6 },
             };
         }
 
@@ -67,11 +69,13 @@ namespace MessagePack.Resolvers
 
             switch (key)
             {
-                case 0: return new MessagePack.Formatters.MiniverseShared.MessagePackObjects.PlayerFormatter();
-                case 1: return new MessagePack.Formatters.MiniverseShared.MessagePackObjects.RoomFormatter();
-                case 2: return new MessagePack.Formatters.MiniverseShared.NankaFormatter();
-                case 3: return new MessagePack.Formatters.MiniverseShared.WebAPI.MagicOnionURLRequestFormatter();
-                case 4: return new MessagePack.Formatters.MiniverseShared.WebAPI.MagicOnionURLResponseFormatter();
+                case 0: return new global::MessagePack.Formatters.ListFormatter<global::MiniverseShared.MessagePackObjects.Player>();
+                case 1: return new MessagePack.Formatters.MiniverseShared.MessagePackObjects.MajorityGameRoomInfoFormatter();
+                case 2: return new MessagePack.Formatters.MiniverseShared.MessagePackObjects.PlayerFormatter();
+                case 3: return new MessagePack.Formatters.MiniverseShared.MessagePackObjects.RoomFormatter();
+                case 4: return new MessagePack.Formatters.MiniverseShared.NankaFormatter();
+                case 5: return new MessagePack.Formatters.MiniverseShared.WebAPI.MagicOnionURLRequestFormatter();
+                case 6: return new MessagePack.Formatters.MiniverseShared.WebAPI.MagicOnionURLResponseFormatter();
                 default: return null;
             }
         }
@@ -107,6 +111,58 @@ namespace MessagePack.Resolvers
 
 namespace MessagePack.Formatters.MiniverseShared.MessagePackObjects
 {
+    public sealed class MajorityGameRoomInfoFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::MiniverseShared.MessagePackObjects.MajorityGameRoomInfo>
+    {
+
+        public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::MiniverseShared.MessagePackObjects.MajorityGameRoomInfo value, global::MessagePack.MessagePackSerializerOptions options)
+        {
+            if (value == null)
+            {
+                writer.WriteNil();
+                return;
+            }
+
+            global::MessagePack.IFormatterResolver formatterResolver = options.Resolver;
+            writer.WriteArrayHeader(2);
+            global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Ulid>(formatterResolver).Serialize(ref writer, value.Ulid, options);
+            global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Collections.Generic.List<global::MiniverseShared.MessagePackObjects.Player>>(formatterResolver).Serialize(ref writer, value.Players, options);
+        }
+
+        public global::MiniverseShared.MessagePackObjects.MajorityGameRoomInfo Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
+        {
+            if (reader.TryReadNil())
+            {
+                return null;
+            }
+
+            options.Security.DepthStep(ref reader);
+            global::MessagePack.IFormatterResolver formatterResolver = options.Resolver;
+            var length = reader.ReadArrayHeader();
+            var __Ulid__ = default(global::System.Ulid);
+            var __Players__ = default(global::System.Collections.Generic.List<global::MiniverseShared.MessagePackObjects.Player>);
+
+            for (int i = 0; i < length; i++)
+            {
+                switch (i)
+                {
+                    case 0:
+                        __Ulid__ = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Ulid>(formatterResolver).Deserialize(ref reader, options);
+                        break;
+                    case 1:
+                        __Players__ = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Collections.Generic.List<global::MiniverseShared.MessagePackObjects.Player>>(formatterResolver).Deserialize(ref reader, options);
+                        break;
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
+            var ____result = new global::MiniverseShared.MessagePackObjects.MajorityGameRoomInfo(__Ulid__, __Players__);
+            reader.Depth--;
+            return ____result;
+        }
+    }
+
     public sealed class PlayerFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::MiniverseShared.MessagePackObjects.Player>
     {
 
